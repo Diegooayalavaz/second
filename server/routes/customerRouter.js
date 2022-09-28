@@ -5,11 +5,11 @@ const auth = require("../middleware/auth");
 
 router.post("/", auth, async (req, res) => {
     try {
-        const { name } = req.body;
-        const newCustomer = new Customer({
-            name
-        });
 
+
+        const newCustomer = new Customer(req.body);
+
+        console.log("este es el nuevo customer:" + newCustomer);
         const savedCustomer = await newCustomer.save();
 
         res.json(savedCustomer);
