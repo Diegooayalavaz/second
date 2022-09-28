@@ -7,7 +7,7 @@ router.post("/", async (req, res) => {
 
     try {
         const { email, password, passwordVerify } = req.body;
-
+ 
         //Validation
         if (!email || !password || !passwordVerify) {
             return res
@@ -53,7 +53,7 @@ router.post("/", async (req, res) => {
         }, process.env.JWT_SECRET
         );
 
-        console.log(token);
+        console.log("token es" + token);
 
         //send the token in a HTTP-only cookie
         res.cookie("token", token, {

@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const {getLoggedIn} = useContext(AuthContext);
+    const navigate = useNavigate();
 
     async function login(e) {
         e.preventDefault();
@@ -17,6 +23,8 @@ const Login = () => {
             await axios.post("http://localhost:5005/auth/login/", loginData, {
                 withCredentials: true
             });
+            await getLoggedIn();
+            navigate("/");
 
         } catch (error) {
             console.error(error);
